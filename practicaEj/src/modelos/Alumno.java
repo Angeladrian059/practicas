@@ -197,4 +197,26 @@ public class Alumno {
         }
 
     }
+    // ============================
+    // ELIMINAR
+    // ============================
+
+    public static void deleteByMatricula(String matricula) {
+
+        String sql = "DELETE FROM alumno WHERE matricula=?";
+
+        try (Connection con = Conexion.conectar();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, matricula);
+
+            ps.executeUpdate();
+
+            System.out.println("Alumno eliminado correctamente.");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
 }
