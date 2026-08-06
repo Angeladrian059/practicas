@@ -99,4 +99,42 @@ public class Alumno {
         }
 
     }
+    // ============================
+    // BUSCAR POR MATRICULA
+    // ============================
+
+    public static Alumno findByMatricula(String matriculaBuscar) {
+
+        Alumno alumno = null;
+
+        String sql = "SELECT * FROM alumno WHERE matricula=?";
+
+        try (Connection con = Conexion.conectar();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, matriculaBuscar);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+
+                alumno = new Alumno();
+
+                alumno.setId(rs.getInt("id"));
+                alumno.setMatricula(rs.getString("matricula"));
+                alumno.setNombre(rs.getString("nombre"));
+                alumno.setEdad(rs.getInt("edad"));
+                alumno.setSexo(rs.getString("sexo"));
+                alumno.setCorreo(rs.getString("correo"));
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return alumno;
+
+    }
+
 }
