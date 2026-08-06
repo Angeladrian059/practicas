@@ -244,7 +244,7 @@ public class Main {
 
         } while (opcion != 8);
 
-        sc.close();
+
 
     }
 
