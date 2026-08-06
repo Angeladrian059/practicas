@@ -15,3 +15,26 @@ public class Conexion {
     public static Connection conectar() {
 
         Connection conexion = null;
+
+        try {
+
+            String url = "jdbc:sqlserver://" + SERVER + ":" + PORT
+                    + ";databaseName=" + DATABASE
+                    + ";encrypt=true;trustServerCertificate=true;";
+
+            conexion = DriverManager.getConnection(url, USER, PASSWORD);
+
+            System.out.println("Conexión exitosa.");
+
+        } catch (SQLException e) {
+
+            System.out.println("Error al conectar con la base de datos.");
+            e.printStackTrace();
+
+        }
+
+        return conexion;
+
+    }
+
+}
