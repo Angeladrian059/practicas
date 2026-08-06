@@ -171,4 +171,30 @@ public class Alumno {
         return lista;
 
     }
+    // ============================
+    // ACTUALIZAR
+    // ============================
+
+    public void update() {
+
+        String sql = "UPDATE alumno SET nombre=?,edad=?,sexo=?,correo=? WHERE matricula=?";
+
+        try (Connection con = Conexion.conectar();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, nombre);
+            ps.setInt(2, edad);
+            ps.setString(3, sexo);
+            ps.setString(4, correo);
+            ps.setString(5, matricula);
+
+            ps.executeUpdate();
+
+            System.out.println("Alumno actualizado correctamente.");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
 }
