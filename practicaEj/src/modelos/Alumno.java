@@ -1,4 +1,4 @@
-package models;
+package modelos;
 
 import database.Conexion;
 
@@ -73,5 +73,30 @@ public class Alumno {
 
     public void setCorreo(String correo) {
         this.correo = correo;
+    }
+    // REGISTRAR ALUMNO
+    // ============================
+
+    public void save() {
+
+        String sql = "INSERT INTO alumno(matricula,nombre,edad,sexo,correo) VALUES(?,?,?,?,?)";
+
+        try (Connection con = Conexion.conectar();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, matricula);
+            ps.setString(2, nombre);
+            ps.setInt(3, edad);
+            ps.setString(4, sexo);
+            ps.setString(5, correo);
+
+            ps.executeUpdate();
+
+            System.out.println("Alumno registrado correctamente.");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 }
