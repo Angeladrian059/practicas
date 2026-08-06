@@ -136,5 +136,39 @@ public class Alumno {
         return alumno;
 
     }
+// MOSTRAR TODOS
+    // ============================
 
+    public static ArrayList<Alumno> getAll() {
+
+        ArrayList<Alumno> lista = new ArrayList<>();
+
+        String sql = "SELECT * FROM alumno";
+
+        try (Connection con = Conexion.conectar();
+             Statement st = con.createStatement();
+             ResultSet rs = st.executeQuery(sql)) {
+
+            while (rs.next()) {
+
+                Alumno alumno = new Alumno();
+
+                alumno.setId(rs.getInt("id"));
+                alumno.setMatricula(rs.getString("matricula"));
+                alumno.setNombre(rs.getString("nombre"));
+                alumno.setEdad(rs.getInt("edad"));
+                alumno.setSexo(rs.getString("sexo"));
+                alumno.setCorreo(rs.getString("correo"));
+
+                lista.add(alumno);
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return lista;
+
+    }
 }
