@@ -219,4 +219,31 @@ public class Alumno {
         }
 
     }
+    // ============================
+    // CONTAR HOMBRES Y MUJERES
+    // ============================
+
+    public static void countBySexo() {
+
+        String sql = "SELECT sexo, COUNT(*) AS total FROM alumno GROUP BY sexo";
+
+        try (Connection con = Conexion.conectar();
+             Statement st = con.createStatement();
+             ResultSet rs = st.executeQuery(sql)) {
+
+            while (rs.next()) {
+
+                System.out.println(
+                        "Sexo: " + rs.getString("sexo") +
+                                " | Total: " + rs.getInt("total")
+                );
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 }
